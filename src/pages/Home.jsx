@@ -9,6 +9,7 @@ import {
   FaMicrochip,
   FaClock,
 } from "react-icons/fa";
+import Navbar from "../components/layout/Navbar";
 
 // --- Custom 3D Tilt Card Component ---
 const InteractiveCard = ({ children, to }) => {
@@ -55,7 +56,7 @@ const InteractiveCard = ({ children, to }) => {
         rotateY,
         transformStyle: "preserve-3d",
       }}
-      className="relative group rounded-2xl bg-gradient-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/80 p-1 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/50 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)]"
+      className="relative group rounded-2xl bg-linear-to-b from-slate-900/90 to-slate-950/90 border border-slate-800/80 p-1 backdrop-blur-xl transition-all duration-300 hover:border-violet-500/50 hover:shadow-[0_20px_50px_rgba(139,92,246,0.15)]"
     >
       <Link
         to={to}
@@ -84,31 +85,31 @@ const Home = () => {
   const modules = [
     {
       title: "03 UVM Driver Universal Recipe",
-      path: "/module3",
+      path: "/driver/module3",
       icon: <FaBookOpen size={24} />,
       description: "Learn the universal UVM driver architecture.",
     },
     {
       title: "04 UVM Driver Type Taxonomy Pattern Map",
-      path: "/module4",
+      path: "/driver/module4",
       icon: <FaProjectDiagram size={24} />,
       description: "Understand driver classifications and patterns.",
     },
     {
       title: "05 UVM Driver Sequence Sequencer Driver Handshake ",
-      path: "/module5",
+      path: "/driver/module5",
       icon: <FaExchangeAlt size={24} />,
       description: "Master request-response communication.",
     },
     {
       title: "06 UVM Driver APB Style Non Pipelined Command Driver",
-      path: "/module6",
+      path: "/driver/module6",
       icon: <FaMicrochip size={24} />,
       description: "Build APB protocol based drivers.",
     },
     {
       title: "07 UVM Driver Timing Clocking Blocks Race Conditions",
-      path: "/module7",
+      path: "/driver/module7",
       icon: <FaClock size={24} />,
       description: "Handle race conditions and clocking blocks.",
     },
@@ -116,9 +117,10 @@ const Home = () => {
 
   return (
     <div className="relative min-h-screen bg-slate-950 text-white overflow-hidden font-sans selection:bg-violet-500/30">
+      <Navbar />
       {/* --- High-End Radial Glow Grid --- */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-gradient-to-r from-violet-600/20 to-indigo-600/20 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-200 h-87.5 bg-linear-to-r from-violet-600/20 to-indigo-600/20 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Hero Section */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 pt-32 pb-20 text-center">
@@ -133,7 +135,7 @@ const Home = () => {
             Advanced Verification Hub
           </span>
 
-          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-slate-200 to-slate-400">
+          <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-6 bg-clip-text text-transparent bg-linear-to-b from-white via-slate-200 to-slate-400">
             UVM Driver Mastery
           </h1>
 
@@ -146,7 +148,7 @@ const Home = () => {
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 items-center">
             <motion.button
               whileHover={{ scale: 1.02, y: -2 }}
-              onClick={() => navigate("/module3")}
+              onClick={() => navigate("/driver/module3")}
               whileTap={{ scale: 0.98 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               className="cursor-pointer w-full sm:w-auto px-8 py-4 rounded-xl font-semibold bg-white text-slate-950 shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:bg-slate-100 transition-colors duration-200"
@@ -179,13 +181,13 @@ const Home = () => {
           <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
             Curriculum Core
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-slate-800 to-transparent ml-6 hidden sm:block" />
+          <div className="h-px flex-1 bg-linear-to-r from-slate-800 to-transparent ml-6 hidden sm:block" />
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {modules.map((module) => (
             <InteractiveCard key={module.path} to={module.path}>
-              <div className="p-6 h-full flex flex-col justify-between items-start min-h-[220px]">
+              <div className="p-6 h-full flex flex-col justify-between items-start min-h-55">
                 <div className="w-full">
                   {/* Glassmorphic Icon Badge */}
                   <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 w-fit text-violet-400 group-hover:text-white group-hover:border-violet-500/30 group-hover:bg-violet-600/10 transition-all duration-300">
