@@ -28,8 +28,8 @@ const Module3 = () => {
   return (
     <div className="relative min-h-screen bg-slate-950 text-white font-sans">
       {/* Background glow */}
-      <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-      <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] bg-gradient-to-r from-violet-600/15 to-indigo-600/15 blur-[100px] rounded-full" />
+      <div className="pointer-events-none fixed inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+      <div className="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-150 h-62.5 bg-linear-to-r from-violet-600/15 to-indigo-600/15 blur-[100px] rounded-full" />
 
       <div className="relative z-10 flex max-w-7xl mx-auto">
         {/* ── Sidebar TOC (desktop) ────────────────────────────────────── */}
@@ -627,7 +627,7 @@ endtask`}</CodeBlock>
             </ol>
 
             {/* Final Recall Card */}
-            <div className="mt-8 rounded-2xl bg-gradient-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6">
+            <div className="mt-8 rounded-2xl bg-linear-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6">
               <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">
                 One-Line Interview Answer
               </p>

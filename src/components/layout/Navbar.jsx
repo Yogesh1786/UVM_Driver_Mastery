@@ -43,7 +43,7 @@ export default function Navbar() {
               to="/"
               className="text-2xl font-bold text-white tracking-wide"
             >
-              Verification Academy
+              UVM Academy
             </Link>
 
             {/* Desktop */}
