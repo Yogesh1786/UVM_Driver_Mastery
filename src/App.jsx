@@ -1,17 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Common components
 import ScrollToTop from "./components/common/ScrollToTop";
-
-import MainLayout from "./layouts/MainLayout";
-import UVMAcademy from "./pages/UVMAcademy";
-
-import UVMDriverMastery from "./pages/UVMDriverMastery";
-import Module3 from "./pages/modules/Module3";
-import Module4 from "./pages/modules/Module4";
-import Module5 from "./pages/modules/Module5";
-import Module6 from "./pages/modules/Module6";
-import Module7 from "./pages/modules/Module7";
 import ScrollToTopButton from "./components/common/ScrollToTopButton";
+
+// Layouts
+import MainLayout from "./layouts/MainLayout";
+
+// Pages
+import UVMAcademy from "./pages/UVMAcademy";
+import UVMDriverMastery from "./pages/UVMDriverMastery";
+
+// Routes
+import { moduleRoutes } from "./routes/moduleRoutes";
 
 function App() {
   return (
@@ -27,15 +28,13 @@ function App() {
 
           <Route path="/driver-mastery" element={<UVMDriverMastery />} />
 
-          <Route path="/driver/module3" element={<Module3 />} />
-
-          <Route path="/driver/module4" element={<Module4 />} />
-
-          <Route path="/driver/module5" element={<Module5 />} />
-
-          <Route path="/driver/module6" element={<Module6 />} />
-
-          <Route path="/driver/module7" element={<Module7 />} />
+          {moduleRoutes.map((Module, index) => (
+            <Route
+              key={index}
+              path={`/driver-mastery/module${index}`}
+              element={<Module />}
+            />
+          ))}
         </Route>
       </Routes>
     </BrowserRouter>

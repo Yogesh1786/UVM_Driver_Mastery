@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
 import {
   FaBookOpen,
@@ -70,8 +69,6 @@ const InteractiveCard = ({ children, to }) => {
 
 // --- Main Page Component ---
 const Home = () => {
-  const navigate = useNavigate();
-
   const modulesRef = useRef(null);
 
   const scrollToModules = () => {
@@ -83,34 +80,88 @@ const Home = () => {
 
   const modules = [
     {
+      title: "00 SVUVM Foundation Before Drivers",
+      path: "/driver-mastery/module0",
+      icon: <FaBookOpen size={24} />,
+      description: "Foundation concepts required before learning UVM Drivers.",
+    },
+    {
+      title: "01 UVM Driver Core Mental Model",
+      path: "/driver-mastery/module1",
+      icon: <FaProjectDiagram size={24} />,
+      description: "Build the mental framework behind UVM driver behavior.",
+    },
+    {
+      title: "02 UVM Driver Basic Anatomy",
+      path: "/driver-mastery/module2",
+      icon: <FaBookOpen size={24} />,
+      description: "Understand the internal structure of a UVM Driver.",
+    },
+    {
       title: "03 UVM Driver Universal Recipe",
-      path: "/driver/module3",
+      path: "/driver-mastery/module3",
       icon: <FaBookOpen size={24} />,
       description: "Learn the universal UVM driver architecture.",
     },
     {
       title: "04 UVM Driver Type Taxonomy Pattern Map",
-      path: "/driver/module4",
+      path: "/driver-mastery/module4",
       icon: <FaProjectDiagram size={24} />,
       description: "Understand driver classifications and patterns.",
     },
     {
-      title: "05 UVM Driver Sequence Sequencer Driver Handshake ",
-      path: "/driver/module5",
+      title: "05 UVM Driver Sequence Sequencer Driver Handshake",
+      path: "/driver-mastery/module5",
       icon: <FaExchangeAlt size={24} />,
       description: "Master request-response communication.",
     },
     {
-      title: "06 UVM Driver APB Style Non Pipelined Command Driver",
-      path: "/driver/module6",
+      title: "06 UVM Driver APB Style Non-Pipelined Command Driver",
+      path: "/driver-mastery/module6",
       icon: <FaMicrochip size={24} />,
       description: "Build APB protocol based drivers.",
     },
     {
       title: "07 UVM Driver Timing Clocking Blocks Race Conditions",
-      path: "/driver/module7",
+      path: "/driver-mastery/module7",
       icon: <FaClock size={24} />,
       description: "Handle race conditions and clocking blocks.",
+    },
+    {
+      title: "08 UVM Driver APB Master Driver Deep Dive",
+      path: "/driver-mastery/module8",
+      icon: <FaMicrochip size={24} />,
+      description: "Deep dive into APB master driver implementation.",
+    },
+    {
+      title: "09 UVM Driver Ready Valid Streaming",
+      path: "/driver-mastery/module9",
+      icon: <FaExchangeAlt size={24} />,
+      description: "Implement Ready/Valid streaming protocols.",
+    },
+    {
+      title: "10 UVM Driver AXI4 Lite Driver Deep Dive",
+      path: "/driver-mastery/module10",
+      icon: <FaMicrochip size={24} />,
+      description: "Understand AXI4-Lite driver architecture and flows.",
+    },
+    {
+      title: "11 UVM Driver Pipelined and Multi Channel",
+      path: "/driver-mastery/module11",
+      icon: <FaProjectDiagram size={24} />,
+      description: "Build pipelined and multi-channel drivers.",
+    },
+    {
+      title: "12 UVM Driver Slave Responder Reactive Drivers",
+      path: "/driver-mastery/module12",
+      icon: <FaExchangeAlt size={24} />,
+      description: "Learn reactive and slave responder driver techniques.",
+    },
+    {
+      title: "13 UVM Driver Monitor Scoreboard Driver",
+      path: "/driver-mastery/module13",
+      icon: <FaProjectDiagram size={24} />,
+      description: "Connect monitors, scoreboards, and drivers together.",
     },
   ];
 
@@ -172,7 +223,7 @@ const Home = () => {
           <div className="h-px flex-1 bg-linear-to-r from-slate-800 to-transparent ml-6 hidden sm:block" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {modules.map((module) => (
             <InteractiveCard key={module.path} to={module.path}>
               <div className="p-6 h-full flex flex-col justify-between items-start min-h-55">
