@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
 import {
   FaBook,
   FaBug,
   FaFlask,
   FaQuestionCircle,
   FaListAlt,
-  FaArrowLeft,
 } from "react-icons/fa";
 import Table from "../../components/common/Table";
 import Callout from "../../components/ui/Callout";
@@ -15,6 +13,7 @@ import ModuleHero from "../../components/ui/ModuleHero";
 import ModuleNavigation from "../../components/ui/ModuleNavigation";
 import CodeBlock from "../../components/ui/CodeBlock";
 import CollapsibleCard from "../../components/ui/CollapsibleCard";
+import BackToHomeBtn from "../../components/common/BackToHomeBtn";
 
 // Module3 data
 
@@ -235,12 +234,7 @@ const Module3 = () => {
         {/* ── Main Content ─────────────────────────────────────────────── */}
         <main className="flex-1 min-w-0 px-6 py-8 pb-24 max-w-4xl">
           {/* Mobile back */}
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-violet-400 transition-colors mb-6 lg:hidden"
-          >
-            <FaArrowLeft size={10} /> Back to Home
-          </Link>
+          <BackToHomeBtn />
 
           {/* Hero */}
           <ModuleHero
