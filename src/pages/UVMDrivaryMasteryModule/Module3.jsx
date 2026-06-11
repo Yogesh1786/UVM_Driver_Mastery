@@ -16,10 +16,203 @@ import ModuleNavigation from "../../components/ui/ModuleNavigation";
 import CodeBlock from "../../components/ui/CodeBlock";
 import CollapsibleCard from "../../components/ui/CollapsibleCard";
 
-import { module3Sections } from "../../data/module3/module3Sections";
-import { module3MemoryCards } from "../../data/module3/module3MemoryCards";
-import { module3BugGallery } from "../../data/module3/module3BugGallery";
-import { module3InterviewQA } from "../../data/module3/module3InterviewQA";
+// Module3 data
+
+// Module 3: Bug Gallery
+
+const module3BugGallery = [
+  {
+    title: "Bug 1 — Early item_done()",
+    symptom:
+      "Sequence starts the next item too early. Driver may overwrite cmd_data before the previous transfer is accepted.",
+    waveform:
+      "cmd_valid high, cmd_ready low, cmd_data changes before ready goes high.",
+    cause: "item_done() released the sequencer item before protocol handshake.",
+    bad: `seq_item_port.get_next_item(req);
+vif.drv_cb.cmd_valid <= 1'b1;
+vif.drv_cb.cmd_data  <= req.data;
+seq_item_port.item_done();
+
+do @(vif.drv_cb);
+while (vif.drv_cb.cmd_ready !== 1'b1);`,
+    fix: `seq_item_port.get_next_item(req);
+drive_until_handshake(req);
+cleanup();
+seq_item_port.item_done();`,
+    interview:
+      "In a non-pipelined driver, item_done() must represent safe driver-side completion.",
+  },
+  {
+    title: "Bug 2 — Missing item_done() on Reset Abort",
+    symptom: "Test hangs after reset. Sequence never finishes finish_item().",
+    waveform:
+      "Reset asserted during active transfer; driver returns idle; sequencer never advances.",
+    cause: "Driver accepted item but never closed the contract.",
+    bad: `seq_item_port.get_next_item(req);
+while (vif.drv_cb.cmd_ready !== 1'b1) begin
+  @(vif.drv_cb);
+  if (vif.drv_cb.rst_n !== 1'b1) begin
+    drive_idle();
+    return;
+  end
+end`,
+    fix: `seq_item_port.get_next_item(req);
+aborted = drive_with_reset_abort(req);
+seq_item_port.item_done();`,
+    interview:
+      "Reset cleanup must include sequencer cleanup, not only pin cleanup.",
+  },
+  {
+    title: "Bug 3 — Pairing get() with item_done()",
+    symptom: "Sequencer-driver protocol error.",
+    waveform: "Waveform may look fine while control flow breaks.",
+    cause: "get() and get_next_item() are different contracts.",
+    bad: `seq_item_port.get(req);
+drive_item(req);
+seq_item_port.item_done();`,
+    fix: `seq_item_port.get(req);
+drive_item(req);
+// no item_done()`,
+    interview: "get_next_item() opens an item_done obligation; get() does not.",
+  },
+  {
+    title: "Bug 5 — Leaving valid High After Completion",
+    symptom: "DUT accepts same command multiple times.",
+    waveform: "cmd_valid remains high across multiple ready pulses.",
+    cause: "Cleanup step is missing.",
+    bad: `do @(vif.drv_cb);
+while (vif.drv_cb.cmd_ready !== 1'b1);
+
+seq_item_port.item_done();`,
+    fix: `wait_handshake();
+
+vif.drv_cb.cmd_valid <= 1'b0;
+vif.drv_cb.cmd_data  <= '0;
+
+@(vif.drv_cb);
+
+seq_item_port.item_done();`,
+    interview:
+      "Cleanup is not cosmetic. It prevents duplicate protocol activity.",
+  },
+];
+
+// Module 3: Memory Cards
+
+const module3MemoryCards = [
+  {
+    title: "Card 1 — The Driver Is a Translator, Not a Checker",
+    accent: "violet",
+    hook: "Driver translates intent into pins.",
+    concept:
+      "A sequence item is abstract intent. A driver turns it into timed DUT input activity. It must not become the scoreboard.",
+    code: `seq_item_port.get_next_item(req);
+drive_item(req);
+seq_item_port.item_done();`,
+    trap: "Putting functional comparisons inside the driver because the driver can 'see' response signals.",
+    interview:
+      "A driver owns legal stimulus timing. It does not own end-to-end functional correctness.",
+  },
+  {
+    title: "Card 2 — The Universal Recipe",
+    accent: "blue",
+    hook: "GET → DECODE → RESET → IDLE → DRIVE → HANDSHAKE → RESPONSE → CLEANUP → DONE",
+    concept:
+      "Most driver bugs happen because one recipe step is missing or in the wrong position.",
+    code: `get_item();
+decode_item();
+wait_reset_inactive();
+wait_bus_idle();
+drive_request();
+wait_handshake();
+sample_response();
+cleanup_bus();
+finish_item();`,
+    trap: "Calling item_done() after drive_request() but before wait_handshake().",
+    interview:
+      "I structure drivers around protocol completion, not around when assignment statements finish.",
+  },
+  {
+    title: "Card 3 — GET Means You Own an Open Sequencer Contract",
+    accent: "violet",
+    hook: "After GET, you owe DONE.",
+    concept:
+      "Once get_next_item(req) returns, the driver must eventually call item_done() exactly once.",
+    code: `seq_item_port.get_next_item(req);
+// must eventually happen:
+seq_item_port.item_done();`,
+    trap: "Reset occurs after get_next_item() and the driver waits forever without calling item_done().",
+    interview:
+      "After get_next_item(), reset handling must close or explicitly abort the item contract.",
+  },
+  {
+    title: "Card 11 — ITEM_DONE Belongs After Safe Completion",
+    accent: "amber",
+    hook: "Done means safe to release.",
+    concept:
+      "For non-pipelined drivers, item_done() normally belongs after drive, handshake, response sampling, and cleanup decision.",
+    code: `drive_to_completion(req);
+cleanup();
+seq_item_port.item_done();`,
+    trap: "Calling item_done() immediately after get_next_item() to improve throughput.",
+    interview:
+      "In a non-pipelined driver, early item_done() lies to the sequence.",
+  },
+];
+
+// Module 3: Interview QA
+
+const module3InterviewQA = [
+  {
+    q: "What is the universal driver recipe?",
+    short:
+      "GET → DECODE → WAIT RESET → WAIT IDLE → DRIVE → HANDSHAKE → SAMPLE RESPONSE → CLEANUP → ITEM_DONE",
+    deep: "The driver accepts a sequence item, converts it into protocol intent, waits for legal conditions, drives pins, waits for completion, captures response, cleans the interface, and releases the item.",
+    followup: "Why not call item_done() immediately after driving?",
+    answer:
+      "Because driving pins is not protocol completion. Completion occurs after acceptance.",
+  },
+  {
+    q: "What does get_next_item() mean?",
+    short: "The driver accepts the next item and must later call item_done().",
+    deep: "get_next_item() opens a sequencer-driver contract.",
+    followup: "What happens if reset occurs after get_next_item()?",
+    answer: "The driver must clean pins and close or abort the item contract.",
+  },
+  {
+    q: "What is the most common beginner driver bug?",
+    short: "Calling item_done() too early.",
+    deep: "Assignment completion is not protocol completion.",
+    followup: null,
+    answer: null,
+  },
+  {
+    q: "What belongs in driver vs monitor vs scoreboard?",
+    short: "Driver creates stimulus, monitor observes, scoreboard checks.",
+    deep: "A reusable driver should not contain test-specific functional prediction.",
+    followup: null,
+    answer: null,
+  },
+];
+
+// Module 3: Sections
+
+const module3Sections = [
+  { id: "objectives", label: "Learning Objectives" },
+  { id: "recipe", label: "Protocol Mental Model" },
+  { id: "timing", label: "Timing / Waveform Contract" },
+  { id: "boundary", label: "Driver Responsibility Boundary" },
+  { id: "contract", label: "Seq-Sequencer-Driver Contract" },
+  { id: "reset", label: "Reset / Abort Policy" },
+  { id: "response", label: "Response / Completion Policy" },
+  { id: "memory", label: "Memory Cards" },
+  { id: "atlas", label: "Atlas Sheets" },
+  { id: "codelabs", label: "Code Labs" },
+  { id: "bugs", label: "Bug Gallery" },
+  { id: "race", label: "Race-Condition Checklist" },
+  { id: "interview", label: "Interview Q&A" },
+  { id: "takeaways", label: "Key Takeaways" },
+];
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT
