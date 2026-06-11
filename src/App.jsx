@@ -11,17 +11,21 @@ import Module4 from "./pages/modules/Module4";
 import Module5 from "./pages/modules/Module5";
 import Module6 from "./pages/modules/Module6";
 import Module7 from "./pages/modules/Module7";
+import ScrollToTopButton from "./components/common/ScrollToTopButton";
 
 function App() {
   return (
     <BrowserRouter>
+      {/* Used to Scroll to top of the page */}
       <ScrollToTop />
 
+      {/* This is a scroll to top button */}
+      <ScrollToTopButton />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<UVMAcademy />} />
 
-          <Route path="/driver" element={<UVMDriverMastery />} />
+          <Route path="/driver-mastery" element={<UVMDriverMastery />} />
 
           <Route path="/driver/module3" element={<Module3 />} />
 

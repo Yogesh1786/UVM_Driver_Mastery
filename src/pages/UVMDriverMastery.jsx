@@ -145,16 +145,6 @@ const Home = () => {
           {/* Liquid-Style Action Buttons */}
           <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 items-center">
             <motion.button
-              whileHover={{ scale: 1.02, y: -2 }}
-              onClick={() => navigate("/driver/module3")}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
-              className="cursor-pointer w-full sm:w-auto px-8 py-4 rounded-xl font-semibold bg-white text-slate-950 shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:bg-slate-100 transition-colors duration-200"
-            >
-              Start Learning
-            </motion.button>
-
-            <motion.button
               whileHover={{
                 scale: 1.02,
                 backgroundColor: "rgba(30, 41, 59, 0.8)",

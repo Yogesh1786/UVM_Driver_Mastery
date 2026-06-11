@@ -7,7 +7,7 @@ export const courses = [
     description:
       "Learn complete UVM Driver Architecture from beginner to advanced.",
     icon: FiCpu,
-    path: "/driver",
+    path: "/driver-mastery",
     available: true,
   },
 

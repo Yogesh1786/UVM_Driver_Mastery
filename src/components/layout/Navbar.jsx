@@ -5,7 +5,7 @@ import { Menu, X, Cpu, Monitor, ShieldCheck, Database } from "lucide-react";
 const navItems = [
   {
     title: "Driver",
-    path: "/driver",
+    path: "/driver-mastery",
     icon: Cpu,
     available: true,
   },
