@@ -3,7 +3,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 const ModuleSidebar = ({ moduleNumber, title, sections }) => {
   return (
-    <aside className="hidden lg:flex flex-col w-64 shrink-0 sticky top-0 h-screen overflow-y-auto py-8 px-4 border-r border-slate-800/60">
+    <aside className="hidden lg:flex flex-col w-64 shrink-0 sticky top-14 h-screen overflow-y-auto py-8 px-4 border-r border-slate-800/60">
       <Link
         to="/"
         className="flex items-center gap-2 text-xs text-slate-400 hover:text-violet-400 transition-colors mb-6"
