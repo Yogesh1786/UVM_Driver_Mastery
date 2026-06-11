@@ -13,13 +13,13 @@ import SectionHeading from "../../components/common/SectionHeading";
 import ModuleSidebar from "../../components/layout/Sidebar";
 import ModuleHero from "../../components/ui/ModuleHero";
 import ModuleNavigation from "../../components/ui/ModuleNavigation";
+import CodeBlock from "../../components/ui/CodeBlock";
 import CollapsibleCard from "../../components/ui/CollapsibleCard";
-import { module3Sections } from "../../data/module3/module3Sections";
 
+import { module3Sections } from "../../data/module3/module3Sections";
 import { module3MemoryCards } from "../../data/module3/module3MemoryCards";
 import { module3BugGallery } from "../../data/module3/module3BugGallery";
 import { module3InterviewQA } from "../../data/module3/module3InterviewQA";
-import CodeBlock from "../../components/ui/CodeBlock";
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // MAIN COMPONENT

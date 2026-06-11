@@ -1,11 +1,46 @@
-import { courses } from "../data/courses";
 import CourseCard from "../components/CourseCard";
 import { motion } from "framer-motion";
+import { FiCpu, FiDatabase, FiMonitor } from "react-icons/fi";
+
+const courses = [
+  {
+    id: 1,
+    title: "UVM Driver Mastery",
+    description:
+      "Learn complete UVM Driver Architecture from beginner to advanced.",
+    icon: FiCpu,
+    path: "/driver-mastery",
+    available: true,
+  },
+  {
+    id: 2,
+    title: "UVM Monitor Mastery",
+    description: "Understand monitor design and transaction capturing.",
+    icon: FiMonitor,
+    path: "/monitor",
+    available: false,
+  },
+  {
+    id: 3,
+    title: "UVM Scoreboard",
+    description: "Learn verification using scoreboards.",
+    icon: FiMonitor,
+    path: "/scoreboard",
+    available: false,
+  },
+  {
+    id: 4,
+    title: "Register Layer (RAL)",
+    description: "Master Register Abstraction Layer.",
+    icon: FiDatabase,
+    path: "/ral",
+    available: false,
+  },
+];
 
 export default function UVMAcademy() {
   return (
     <section className="relative min-h-screen bg-[#020817] text-white overflow-hidden font-sans">
-
       {/* --- Cyber-Grid Background Layer --- */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-size-[4rem_4rem] mask-[radial-gradient(ellipse_60%_50%_at_50%_10%,#000_70%,transparent_100%)] pointer-events-none" />
 
@@ -21,7 +56,7 @@ export default function UVMAcademy() {
           className="text-center"
         >
           <span className="inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs font-semibold bg-violet-500/10 text-violet-400 border border-violet-500/20 mb-6 uppercase tracking-wider">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />{" "}
+            <span className="w-1.5 h-1.5 rounded-full bg-violet-400 animate-pulse" />
             E-Learning Platform
           </span>
 
@@ -35,7 +70,6 @@ export default function UVMAcademy() {
           </p>
         </motion.div>
 
-        {/* Dynamic Grid Layout */}
         <div className="mt-24 grid gap-8 md:grid-cols-2 lg:grid-cols-3 items-stretch">
           {courses.map((course, index) => (
             <CourseCard key={course.id} course={course} index={index} />
