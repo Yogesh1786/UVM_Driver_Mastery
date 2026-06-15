@@ -234,7 +234,7 @@ const Module3 = () => {
         {/* ── Main Content ─────────────────────────────────────────────── */}
         <main className="flex-1 min-w-0 px-6 py-8 pb-24 max-w-4xl">
           {/* Mobile back */}
-          <BackToHomeBtn />
+          <BackToHomeBtn to="/driver-mastery" />
 
           {/* Hero */}
           <ModuleHero

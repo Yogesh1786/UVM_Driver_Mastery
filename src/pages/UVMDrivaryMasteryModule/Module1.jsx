@@ -731,7 +731,7 @@ const Module1 = () => {
         {/* ── Main Content ─────────────────────────────────────────────── */}
         <main className="flex-1 min-w-0 px-6 py-8 pb-24 max-w-4xl">
           {/* Mobile back */}
-          <BackToHomeBtn />
+          <BackToHomeBtn to="/driver-mastery" />
 
           {/* ── Hero ─────────────────────────────────────────────────────── */}
           <ModuleHero
@@ -747,7 +747,7 @@ const Module1 = () => {
           />
 
           {/* Module Thesis */}
-          <div className="rounded-2xl bg-gradient-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6 mb-8">
+          <div className="rounded-2xl bg-linear-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6 mb-8">
             <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">
               Module Thesis
             </p>

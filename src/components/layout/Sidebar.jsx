@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 
 const ModuleSidebar = ({ moduleNumber, title, sections }) => {
+  const navigate = useNavigate();
+
   return (
     <aside className="hidden lg:flex flex-col w-64 shrink-0 sticky top-14 h-screen overflow-y-auto py-8 px-4 border-r border-slate-800/60">
-      <Link
-        to="/"
-        className="flex items-center gap-2 text-xs text-slate-400 hover:text-violet-400 transition-colors mb-6"
+      <button
+        type="button"
+        onClick={() => navigate(-1)}
+        className="flex items-center cursor-pointer gap-2 text-xs text-slate-400 hover:text-violet-400 transition-colors mb-6"
       >
         <FaArrowLeft size={10} />
         Back to Home
-      </Link>
+      </button>
 
       <div className="text-[10px] uppercase tracking-widest text-slate-500 font-semibold mb-3">
         Module {moduleNumber}
