@@ -2989,7 +2989,7 @@ endclass`}</CodeBlock>
           {/* ── §21 Final Recall Card ────────────────────────────────────── */}
           <section id="recall">
             <SectionHeading num={21} title="Final Recall Card" />
-            <div className="rounded-2xl bg-gradient-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6">
+            <div className="rounded-2xl bg-linear-to-br from-violet-600/10 to-indigo-600/10 border border-violet-500/20 p-6">
               <p className="text-xs uppercase tracking-widest text-violet-400 font-semibold mb-3">
                 The Six Driver Questions
               </p>

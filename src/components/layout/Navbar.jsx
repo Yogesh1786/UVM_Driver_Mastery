@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="h-20 flex items-center justify-between">
             {/* Elegant Brand Architecture */}
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/10 group-hover:scale-105 transition-transform duration-300">
+              <div className="w-9 h-9 rounded-xl bg-linear-to-br from-violet-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/10 group-hover:scale-105 transition-transform duration-300">
                 <Cpu size={18} className="animate-pulse" />
               </div>
               <span className="text-xl font-black text-white tracking-tight">
@@ -84,7 +84,7 @@ export default function Navbar() {
                     {isActive && (
                       <motion.div
                         layoutId="activeDot"
-                        className="absolute -bottom-[21px] left-1/2 -translate-x-1/2 w-5 h-0.5 bg-violet-400 rounded-full"
+                        className="absolute -bottom-5.25 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-violet-400 rounded-full"
                       />
                     )}
                   </NavLink>
