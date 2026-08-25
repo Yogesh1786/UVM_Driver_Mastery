@@ -10,6 +10,7 @@ import {
   Database,
   Lock,
 } from "lucide-react";
+import { ThemeToggle } from "../../theme.jsx";
 
 const navItems = [
   { title: "Driver", path: "/driver-mastery", icon: Cpu, available: true },
@@ -102,16 +103,24 @@ export default function Navbar() {
                   </div>
                 );
               })}
+
+              {/* Theme Toggle Button right after RAL */}
+              <div className="ml-2 pl-3 border-l border-slate-800">
+                <ThemeToggle />
+              </div>
             </div>
 
-            {/* Premium Custom Micro-Interacting Mobile Toggle */}
-            <motion.button
-              whileTap={{ scale: 0.92 }}
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/40 text-slate-300 hover:text-white"
-            >
-              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-            </motion.button>
+            {/* Mobile Actions (Theme toggle + Hamburger) */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <ThemeToggle />
+              <motion.button
+                whileTap={{ scale: 0.92 }}
+                onClick={() => setMobileOpen(!mobileOpen)}
+                className="w-10 h-10 flex items-center justify-center rounded-xl border border-slate-800 bg-slate-900/40 text-slate-300 hover:text-white"
+              >
+                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+              </motion.button>
+            </div>
           </div>
         </div>
       </nav>
@@ -167,3 +176,4 @@ export default function Navbar() {
     </>
   );
 }
+
